@@ -2,7 +2,7 @@ from pawpal_system import Owner, Pet, Task, Scheduler
 
 
 def main() -> None:
-    owner = Owner(name="Ava Carter", age=36)
+    owner = Owner(owner_name="Ava Carter", age=36)
 
     bella = Pet(
         name="Bella",
@@ -30,19 +30,28 @@ def main() -> None:
     owner.add_pet(luna)
 
     schedule = Scheduler(sort_by="time")
+    warnings: list[str] = []
 
-    schedule.schedule_for_pet(
+    warning = schedule.schedule_for_pet(
         bella,
         Task(description="Morning walk", time="08:00", frequency="daily"),
     )
-    schedule.schedule_for_pet(
+    if warning:
+        warnings.append(warning)
+
+    warning = schedule.schedule_for_pet(
         luna,
         Task(description="Medication", time="09:30", frequency="daily"),
     )
-    schedule.schedule_for_pet(
+    if warning:
+        warnings.append(warning)
+
+    warning = schedule.schedule_for_pet(
         bella,
-        Task(description="Grooming brush", time="17:00", frequency="daily"),
+        Task(description="Grooming brush", time="09:30", frequency="daily"),
     )
+    if warning:
+        warnings.append(warning)
 
     schedule.sort_tasks()
 
@@ -50,8 +59,13 @@ def main() -> None:
     for task in schedule.task_summary():
         print(f"- {task}")
 
+    if warnings:
+        print("\nWarnings:")
+        for warning in warnings:
+            print(f"- {warning}")
+
     print()
-    print(f"Owner: {owner.name}")
+    print(f"Owner: {owner.owner_name}")
     for pet in owner.list_pets():
         print(f"  Pet: {pet.name} ({pet.animal_type})")
         for pet_task in pet.list_tasks():
