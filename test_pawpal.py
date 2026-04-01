@@ -163,3 +163,71 @@ def test_scheduler_filters_tasks_by_completion_and_pet_name() -> None:
     assert pending_tasks == [task_b]
     assert bella_tasks == [task_a]
     assert luna_pending == [task_b]
+
+
+def test_sort_tasks_orders_by_time_chronologically() -> None:
+    # Add tasks in deliberately non-chronological order.
+    task_afternoon = Task(description="Evening walk", time="17:00", frequency="daily")
+    task_morning = Task(description="Breakfast", time="07:30", frequency="daily")
+    task_midday = Task(description="Midday meds", time="12:00", frequency="daily")
+
+    scheduler = Scheduler()
+    scheduler.add_task(task_afternoon)
+    scheduler.add_task(task_morning)
+    scheduler.add_task(task_midday)
+
+    scheduler.sort_tasks()
+
+    times = [task.time for task in scheduler.tasks]
+    assert times == ["07:30", "12:00", "17:00"]
+
+
+def test_daily_task_complete_without_reschedule_creates_no_new_task() -> None:
+    pet = Pet(
+        name="Oscar",
+        age=2,
+        animal_type="Cat",
+        breed="Maine Coon",
+        color="Gray",
+        weight=12.0,
+        height=14.0,
+        medical_conditions="None",
+    )
+    task = Task(
+        description="Morning feed",
+        time="08:00",
+        frequency="daily",
+        due_date=date(2026, 3, 31),
+    )
+    scheduler = Scheduler()
+    scheduler.schedule_for_pet(pet, task)
+
+    next_task = scheduler.complete_task(task, reschedule=False)
+
+    assert task.completed is True
+    assert next_task is None
+    # Only the original task should be in the scheduler.
+    assert len(scheduler.tasks) == 1
+
+
+def test_scheduler_no_conflict_warning_when_tasks_at_different_times() -> None:
+    pet = Pet(
+        name="Cleo",
+        age=6,
+        animal_type="Dog",
+        breed="Beagle",
+        color="Tricolor",
+        weight=22.0,
+        height=38.0,
+        medical_conditions="None",
+    )
+    task_one = Task(description="Morning walk", time="07:00", frequency="daily")
+    task_two = Task(description="Evening walk", time="18:00", frequency="daily")
+
+    scheduler = Scheduler()
+    scheduler.schedule_for_pet(pet, task_one)
+    scheduler.schedule_for_pet(pet, task_two)
+
+    warnings = scheduler.detect_same_time_conflicts()
+
+    assert warnings == []
