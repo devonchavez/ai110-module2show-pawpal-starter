@@ -51,10 +51,14 @@ Scheduler, creates a list of tasks, adds and sorts tasks
 - What constraints does your scheduler consider (for example: time, priority, preferences)?
 - How did you decide which constraints mattered most?
 
+Some constraints that my scheduler considers is when certain tasks overlap eachother. I thought that this mattered most because when making a schedule I thought that it be most important to be meticulous and accurate to something that is able to fit your schedule. When you have tasks that you need to complete that arent accuratley planned out it can cause stalls and if youre responsible for a pet its important that they have an accurate schedule aswell.
+
 **b. Tradeoffs**
 
 - Describe one tradeoff your scheduler makes.
 - Why is that tradeoff reasonable for this scenario?
+
+For on of my warning detection methods in scheduluer AI initially created a "loaded" method which used nested if statements and for loops and was able to simplify the algorithim to a single for loop but the tradeoff was that the new detection algorithim now alowed for some overlap instead of exact time detections. I think the tradeoff could be reasonable if youre looking for faster and storage safe code.
 
 ---
 
@@ -65,10 +69,13 @@ Scheduler, creates a list of tasks, adds and sorts tasks
 - How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
 - What kinds of prompts or questions were most helpful?
 
+I used ai for refactoring, im new to using streamlit and had AI plug in the attributes of my classes into my app file. Initially it would only plug in certain methods into my app and i had to direct the AI to plug in methods i needed if i watned certain features like being able to mark tasks as complete or delete certain tasks.
+
 **b. Judgment and verification**
 
 - Describe one moment where you did not accept an AI suggestion as-is.
 - How did you evaluate or verify what the AI suggested?
+I had to delete suggestions where it would trying creating its own "app sesssion" for when the program ran in my pawpal systems file since the app WAS the session started when the program ran. 
 
 ---
 
@@ -83,7 +90,7 @@ Scheduler, creates a list of tasks, adds and sorts tasks
 
 - How confident are you that your scheduler works correctly?
 - What edge cases would you test next if you had more time?
-
+Im 8/10 confident that it works correctly. I think an edge case I would test would be to see what would happen if there were too many tasks that overlapped and maybe creating a an auto task adjuster algorithim that is able to fix the schedule according to the warnings being output.
 ---
 
 ## 5. Reflection
@@ -91,11 +98,16 @@ Scheduler, creates a list of tasks, adds and sorts tasks
 **a. What went well**
 
 - What part of this project are you most satisfied with?
+Im really satisfied with my sorting algorithim, its really simple clean and easy to read and is able to sort the generated schedule in multiple categories.
 
 **b. What you would improve**
 
 - If you had another iteration, what would you improve or redesign?
+I would improve my UI wiring from my pawpal system file. I think what I had noticed was that initially AI wasnt pluggin in all methods that I had expected for certain fetures like being able to edit tasks and had to ask how to implement those in a way that i wanted it to (having users be able to edit tasks if a warning popped up)
+
 
 **c. Key takeaway**
 
 - What is one important thing you learned about designing systems or working with AI on this project?
+
+I think I learned more about what its really like to create software, Ive always been hesitant on starting a project but the process of creating the logic, having test files, creating ui to interact with the program was broken down pretty well and I hope transfers over for when I start my own project.
