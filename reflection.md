@@ -1,11 +1,41 @@
 # PawPal+ Project Reflection
 
+3 core user controlled actions
+1. track pet information
+- The app should take in as much information about the pet like name, animal type, breed, age, weight, color, feeding schedule, and any known conditions to give recomendations on when to do medical checkups/ how to medically keep up with their pet, maybe a reminder after a checkup to re enter any new infomration about the pet
+2. generate a weekly do list
+- the app should let the user put in a lists of tasks to be completed throughout the week and sort each tasks based off of importance, certain repetetive tasks like "take out pet", or "feed pet" will automatically be scheduled for each day of the week
+3. social media aspect?
+- The user is allowed to take a "picture of the day" for their pet aslong as right a little note to caption the photo.
+
+Owner
+- age, name
+
+Pet
+- age, name, color, animal type, breed, weight, height, any living conditions
+
+Task 
+- user input, time?, how urgent the task is
+
+Scheduler
+- takes in tasks, option to sort by how urgent or time of day
+
 ## 1. System Design
 
 **a. Initial design**
 
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
+
+I ended up including owner, pet, task, and scheduler as classes. 
+
+Ownder, takes in owners age.
+
+Pet, takes in pet name, age, color, animal type, animal breed, weight, height, and any medical conditions
+
+Task, takes in a description, time, and how urgent the task is
+
+Scheduler, creates a list of tasks, adds and sorts tasks
 
 **b. Design changes**
 
